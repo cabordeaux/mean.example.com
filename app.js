@@ -6,6 +6,13 @@ var logger = require('morgan');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
+
+var index = require('./routes/index');
+var apiUsers = require('./routes/api/users');
+var apiArticles = require('./routes/api/articles');
+
+var app = express();
+
 //models
 var Users = require('./models/users');
 
@@ -24,6 +31,16 @@ var app = express();
 mongoose.connect(config.mongodb);
 
 // view engine setup
+app.use('/', index);
+app.use('/api/users', apiUsers);
+app.use('/api/articles',apiArticles);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error ('not Found');
+  err.status = 404;
+  next(err);
+});
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
@@ -46,6 +63,7 @@ app.use(require('express-session')({
     path: '/',
     //domain: config.cookie.domain,
     maxAge: 60 * 60 * 24 * 1000
+    
   }
 }));
 
