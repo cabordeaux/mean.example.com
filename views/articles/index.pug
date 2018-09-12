@@ -1,0 +1,10 @@
+extends ../layout
+
+block content
+  h1 Blog Posts
+  //p Welcome to #{title} #{name} says hello.
+
+  each article in articles
+    a(href='/articles/' + article.slug) 
+      h2= article.title
+      p= article.description

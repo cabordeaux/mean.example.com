@@ -1,10 +1,10 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Lato", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+a, h1, h2 {
+  color: rgb(18, 75, 4);  
 }
 
 label {
@@ -28,12 +28,12 @@ textarea{
 input[type="submit"],
 button,
 a.button{
-  padding: .75rem 1.25rem;
-  font: 24px monospace;
+  padding: .37rem .75rem;
+  font: 12px monospace;
   text-decoration: none;
   appearance: button;
   color: #fff;
-  border: 1px solid #0055ee;
+  border: 1px solid #ee0000;
   background: #fff;
   cursor: pointer;
   background: #0099ee;

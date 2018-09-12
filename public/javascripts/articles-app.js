@@ -37,8 +37,8 @@ function viewIndex(){
     }
 }
 
-function viewArticle(id){
-    var url = 'http://localhost:3000/api/articles/' + id;
+function viewArticle(slug){
+    var url = 'http://localhost:3000/api/articles/' + slug;
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url);
@@ -55,51 +55,51 @@ function viewArticle(id){
             <table class="table">
                 <tbody>
                     <tr><th>ID</th><td>${article._id}</td></tr>
-                    <tr><th>First Name</th><td>${article.slug}</td></tr>
-                    <tr><th>Last Name</th><td>${article.title}</td></tr>
+                    <tr><th>Slug</th><td>${article.slug}</td></tr>
+                    <tr><th>Title</th><td>${article.title}</td></tr>
                     <tr><th>Keywords</th><td>${article.keywords}</td></tr>
                     <tr><th>Description</th><td>${article.description}</td></tr>
                     <tr><th>Body</th><td>${article.body}</td></tr>
                 </tbody>
             </table>
             
-            <h3>Edit the Article Record</h3>
+            <h3>Edit the Article</h3>
             <form id="editArticle" action="/api/articles" method="put">
                 <input type="hidden" name="_id" value="${article._id}">
                 <div>
-                    <label for="articlename">Articlename</label>
+                    <label for="title">Title</label>
                     <input 
                         type="text" 
-                        name="articlename" 
-                        id="articlename" 
-                        value="${article.articlename}">
+                        name="title" 
+                        id="title" 
+                        value="${article.title}">
                 </div>
 
                 <div>
-                    <label for="email">Email</label>
-                    <input 
+                    <label for="keywords">Keywords</label>
+                    <textarea 
                         type="text" 
-                        name="email" 
-                        id="email" 
-                        value="${article.email}">
+                        name="keywords" 
+                        id="keywords" 
+                        >${article.keywords}</textarea>
                 </div>
 
                 <div>
-                    <label for="first_name">First Name</label>
-                    <input 
-                        type="text" 
-                        name="first_name" 
-                        id="first_name" 
-                        value="${article.first_name}">
+                <label for="description">Description</label>
+                <textarea 
+                    type="text" 
+                    name="description" 
+                    id="description" 
+                    >${article.description}</textarea>
                 </div>
 
                 <div>
-                    <label for="last_name">Last Name</label>
-                    <input 
-                        type="text" 
-                        name="last_name" 
-                        id="last_name" 
-                        value="${article.last_name}">
+                        <label for="body">Body</label>
+                        <textarea 
+                            type="text" 
+                            name="body" 
+                            id="body" 
+                        >${article.body}</textarea>
                 </div>
 
                 <input type="submit" value="Submit">
@@ -147,23 +147,8 @@ function createArticle(){
     app.innerHTML = `<h2>Create a New Article</h2>
     <form id="createArticle" action="/api/articles" method="post">
         <div>
-            <label for="articlename">Articlename</label>
-            <input type="text" name="articlename" id="articlename">
-        </div>
-
-        <div>
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email">
-        </div>
-
-        <div>
-            <label for="first_name">First Name</label>
-            <input type="text" name="first_name" id="first_name">
-        </div>
-
-        <div>
-            <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" id="last_name">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title">
         </div>
 
         <input type="submit" value="Submit">
