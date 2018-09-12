@@ -1,5 +1,5 @@
 function viewIndex(){
-    var url = 'http://localhost:3000/api/articles';
+    var url = 'http://localhost:3000/api/users';
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url);
@@ -9,13 +9,13 @@ function viewIndex(){
         let data  = JSON.parse(xhr.response);
         var rows = '';
 
-        for(var i=0; i<data['articles'].length; i++){
-            let x = data['articles'][i];
+        for(var i=0; i<data['users'].length; i++){
+            let x = data['users'][i];
             
             rows = rows + `<tr>
                 <td>
                     <a href="#edit-${x.slug}" 
-                        onclick="viewArticle('${x.slug}')">
+                        onclick="viewUser('${x.slug}')">
                         ${x.title}
                     </a>
                 </td>
@@ -37,8 +37,8 @@ function viewIndex(){
     }
 }
 
-function viewArticle(id){
-    var url = 'http://localhost:3000/api/articles/' + id;
+function viewUser(id){
+    var url = 'http://localhost:3000/api/users/' + id;
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url);
@@ -47,32 +47,32 @@ function viewArticle(id){
     xhr.onload = function(){
 
         var data = JSON.parse(xhr.response);
-        var article = data.articles;
+        var user = data.users;
         var app = document.getElementById('app');
 
         app.innerHTML = `
-            <h2>${article.title}</h2>
+            <h2>${user.title}</h2>
             <table class="table">
                 <tbody>
-                    <tr><th>ID</th><td>${article._id}</td></tr>
-                    <tr><th>First Name</th><td>${article.slug}</td></tr>
-                    <tr><th>Last Name</th><td>${article.title}</td></tr>
-                    <tr><th>Keywords</th><td>${article.keywords}</td></tr>
-                    <tr><th>Description</th><td>${article.description}</td></tr>
-                    <tr><th>Body</th><td>${article.body}</td></tr>
+                    <tr><th>ID</th><td>${user._id}</td></tr>
+                    <tr><th>First Name</th><td>${user.slug}</td></tr>
+                    <tr><th>Last Name</th><td>${user.title}</td></tr>
+                    <tr><th>Keywords</th><td>${user.keywords}</td></tr>
+                    <tr><th>Description</th><td>${user.description}</td></tr>
+                    <tr><th>Body</th><td>${user.body}</td></tr>
                 </tbody>
             </table>
             
-            <h3>Edit the Article Record</h3>
-            <form id="editArticle" action="/api/articles" method="put">
-                <input type="hidden" name="_id" value="${article._id}">
+            <h3>Edit the User Record</h3>
+            <form id="editUser" action="/api/users" method="put">
+                <input type="hidden" name="_id" value="${user._id}">
                 <div>
-                    <label for="articlename">Articlename</label>
+                    <label for="username">Username</label>
                     <input 
                         type="text" 
-                        name="articlename" 
-                        id="articlename" 
-                        value="${article.articlename}">
+                        name="username" 
+                        id="username" 
+                        value="${user.username}">
                 </div>
 
                 <div>
@@ -81,7 +81,7 @@ function viewArticle(id){
                         type="text" 
                         name="email" 
                         id="email" 
-                        value="${article.email}">
+                        value="${user.email}">
                 </div>
 
                 <div>
@@ -90,7 +90,7 @@ function viewArticle(id){
                         type="text" 
                         name="first_name" 
                         id="first_name" 
-                        value="${article.first_name}">
+                        value="${user.first_name}">
                 </div>
 
                 <div>
@@ -99,25 +99,25 @@ function viewArticle(id){
                         type="text" 
                         name="last_name" 
                         id="last_name" 
-                        value="${article.last_name}">
+                        value="${user.last_name}">
                 </div>
 
                 <input type="submit" value="Submit">
             </form>
             
             <div class="actions">
-                <a href="#deleteArticle-${article._id}"
-                    onclick="deleteArticle('${article._id}');"
+                <a href="#deleteUser-${user._id}"
+                    onclick="deleteUser('${user._id}');"
                     class="text-danger"
                 >Delete</a>
             </div>
             `;
 
-        var editArticle = document.getElementById('editArticle');
-        editArticle.addEventListener('submit', function(e){
+        var editUser = document.getElementById('editUser');
+        editUser.addEventListener('submit', function(e){
             e.preventDefault();
-            var formData = new FormData(editArticle);
-            var url = 'http://localhost:3000/api/articles';
+            var formData = new FormData(editUser);
+            var url = 'http://localhost:3000/api/users';
             var xhr = new XMLHttpRequest();
             xhr.open('PUT', url);
             xhr.setRequestHeader(
@@ -142,13 +142,13 @@ function viewArticle(id){
     }
 }
 
-function createArticle(){
+function createUser(){
     var app = document.getElementById('app');
-    app.innerHTML = `<h2>Create a New Article</h2>
-    <form id="createArticle" action="/api/articles" method="post">
+    app.innerHTML = `<h2>Create a New User</h2>
+    <form id="createUser" action="/api/users" method="post">
         <div>
-            <label for="articlename">Articlename</label>
-            <input type="text" name="articlename" id="articlename">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username">
         </div>
 
         <div>
@@ -169,12 +169,12 @@ function createArticle(){
         <input type="submit" value="Submit">
     </form>`;
 
-    var createArticle = document.getElementById('createArticle');
-    createArticle.addEventListener('submit', function(e){
+    var createUser = document.getElementById('createUser');
+    createUser.addEventListener('submit', function(e){
         e.preventDefault();
 
-        var formData = new FormData(createArticle);
-        var url = 'http://localhost:3000/api/articles';
+        var formData = new FormData(createUser);
+        var url = 'http://localhost:3000/api/users';
         var xhr = new XMLHttpRequest();
         xhr.open('POST', url);
 
@@ -198,10 +198,10 @@ function createArticle(){
     });
 }
 
-function deleteArticle(id){
+function deleteUser(id){
     if(confirm('Are you sure?')){
         
-        var url = 'http://localhost:3000/api/articles/' + id;
+        var url = 'http://localhost:3000/api/users/' + id;
 
         var xhr = new XMLHttpRequest();
         xhr.open('DELETE', url);
@@ -224,11 +224,11 @@ if(hash){
     switch(chunks[0]){
 
         case 'edit':
-            viewArticle(chunks[1]);
+            viewUser(chunks[1]);
         break;
 
-        case 'createArticle':
-            createArticle();
+        case 'createUser':
+            createUser();
         break;
 
         default:
