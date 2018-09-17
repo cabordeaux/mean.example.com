@@ -14,9 +14,9 @@ function viewIndex(){
             
             rows = rows + `<tr>
                 <td>
-                    <a href="#edit-${x.slug}" 
-                        onclick="viewUser('${x.slug}')">
-                        ${x.title}
+                    <a href="#edit-${x._id}" 
+                        onclick="viewUser('${x._id}')">
+                        ${x.username}
                     </a>
                 </td>
                 
@@ -27,7 +27,7 @@ function viewIndex(){
         app.innerHTML = `<table class="table">
             <thead>
                 <tr>
-                    <th>Title</th>
+                    <th>Users</th>
                    
                 </tr>
             </thead>
@@ -51,15 +51,13 @@ function viewUser(id){
         var app = document.getElementById('app');
 
         app.innerHTML = `
-            <h2>${user.title}</h2>
+            <h2>${user.username}</h2>
             <table class="table">
                 <tbody>
                     <tr><th>ID</th><td>${user._id}</td></tr>
-                    <tr><th>First Name</th><td>${user.slug}</td></tr>
-                    <tr><th>Last Name</th><td>${user.title}</td></tr>
-                    <tr><th>Keywords</th><td>${user.keywords}</td></tr>
-                    <tr><th>Description</th><td>${user.description}</td></tr>
-                    <tr><th>Body</th><td>${user.body}</td></tr>
+                    <tr><th>First Name</th><td>${user.first_name}</td></tr>
+                    <tr><th>Last Name</th><td>${user.last_name}</td></tr>
+                    <tr><th>email</th><td>${user.email}</td></tr>
                 </tbody>
             </table>
             

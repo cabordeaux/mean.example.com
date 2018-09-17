@@ -3,23 +3,27 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+  </head>  
   body
-    nav
-      a(href='/') Home
-      |&nbsp;|&nbsp;
-      a(href='/articles') Blog
-      |&nbsp;|&nbsp;
 
-      if session.user.id
-        a(href='/users') Users
+    <div class="container">
+      nav
+        a(href='/') Home
         |&nbsp;|&nbsp;
-        a(href='/cms') CMS
+        a(href='/articles') Blog
         |&nbsp;|&nbsp;
-        a(href='/users/logout') Logout 
-        
-      else  
-        a(href='/users/login') Login
-        |&nbsp;|&nbsp;
-        a(href='/users/register') Register
-        
-    block content
+
+        if session.user.id
+          a(href='/users') Users
+          |&nbsp;|&nbsp;
+          a(href='/cms') CMS
+          |&nbsp;|&nbsp;
+          a(href='/users/logout') Logout 
+          
+        else  
+          a(href='/users/login') Login
+          |&nbsp;|&nbsp;
+          a(href='/users/register') Register
+    </div>
+
+      block content

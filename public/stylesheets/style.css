@@ -1,10 +1,22 @@
 body {
-  padding: 50px;
+  padding: 100px;
   font: 14px "Lato", Helvetica, Arial, sans-serif;
 }
 
-a, h1, h2 {
-  color: rgb(18, 75, 4);  
+.container {
+  background-color: #0099ee;
+  padding: .75rem 1.25rem;
+}
+a {
+  color: rgb(244, 247, 239);  
+}
+
+
+h1, h2 {
+  color: rgb(102, 35, 20);
+  display: block;
+  font: 24px monospace;
+  font-weight: bold;
 }
 
 label {
